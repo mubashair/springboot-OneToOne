@@ -1,10 +1,14 @@
 package com.jpa.entity;
 
-import jakarta.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Employee {
@@ -13,6 +17,16 @@ public class Employee {
 	private Integer id;
 	private String firstName;
 	private String lastName;
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"hibernateLazyInitializer"})
+	private Passport passport;
+	
+	public Passport getPassport() {
+		return passport;
+	}
+	public void setPassport(Passport passport) {
+		this.passport = passport;
+	}
 	
 	
 	public Integer getId() {
