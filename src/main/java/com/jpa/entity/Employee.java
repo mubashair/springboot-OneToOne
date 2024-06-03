@@ -1,13 +1,12 @@
 package com.jpa.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -18,7 +17,8 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer"})
+	@JoinColumn(name = "passport_fk", referencedColumnName = "id")
+	//@JsonIgnoreProperties({"hibernateLazyInitializer"})
 	private Passport passport;
 	
 	public Passport getPassport() {
